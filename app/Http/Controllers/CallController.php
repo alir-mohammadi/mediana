@@ -166,4 +166,9 @@ class CallController extends Controller
             ],
         ]);
     }
+
+    public function hangout(Request $request)
+    {
+        return $request->all();
+    }
 }
