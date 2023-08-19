@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('call')->group(function () {
-    Route ::get('/incoming', [\App\Http\Controllers\CallController::class, 'incoming']) -> name('incoming');
-    Route ::get('/redirect', [\App\Http\Controllers\CallController::class, 'redirect']) -> name('redirect');
-    Route ::get('/outgoing/access', [\App\Http\Controllers\CallController::class, 'outAccess']) -> name('out-access');
-    Route ::get('/outgoing/line', [\App\Http\Controllers\CallController::class, 'outLine']) -> name('out-line');
+    Route ::post('/incoming', [\App\Http\Controllers\CallController::class, 'incoming']) -> name('incoming');
+    Route ::post('/redirect', [\App\Http\Controllers\CallController::class, 'redirect']) -> name('redirect');
+    Route ::post('/outgoing/access', [\App\Http\Controllers\CallController::class, 'outAccess']) -> name('out-access');
+    Route ::post('/outgoing/line', [\App\Http\Controllers\CallController::class, 'outLine']) -> name('out-line');
     Route ::post('/hangout', [\App\Http\Controllers\CallController::class, 'hangout']) -> name('hangout');
 });
