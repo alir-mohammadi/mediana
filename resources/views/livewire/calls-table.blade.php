@@ -36,7 +36,7 @@
         </thead>
         <tbody class="border-gray-300 border-t-0 rounded">
         @php
-            $calls = Auth::user()?->phoneNumbers()->first()->callLogs()->paginate(10);
+            $calls = Auth::user()?->phoneNumbers()->first()->callLogs()->simplePaginate(10);
         @endphp
         @if($calls instanceof \Illuminate\Pagination\LengthAwarePaginator && !$calls->isEmpty())
             @foreach($calls as $call)
