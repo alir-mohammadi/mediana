@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
          \App\Models\User::factory()->create([
              'name' => 'Iman Behboodi',
-             'phone_number' => '09393834726',
+             'email' => '09393834726',
          ]);
 
          PhoneNumber::factory()->create([
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
          \App\Models\User::factory()->create([
              'name' => 'Alireza Mohammadi',
-             'phone_number' => '09378419977',
+             'email' => '09378419977',
          ]);
 
 
