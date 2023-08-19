@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->route('login');
+});
 
 Route::get('/dashboard',[\App\Http\Controllers\PanelController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/phone-settings',[\App\Http\Controllers\PanelController::class,'phoneSettings'])->middleware(['auth', 'verified'])->name('phone-settings');
