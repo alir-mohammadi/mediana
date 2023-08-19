@@ -58,10 +58,10 @@
                         {{$meta["DestinationNumber"]}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$meta["DigitsDialed"] ?? null}}
+                        {{($meta["DigitsDialed"] ?? null) != 'none' ? :"-"}}
                     </td>
                     <td class="px-6 py-4">
-                        {{ strlen($meta["DigitsDialed"] ?? "") > 2 ? "خروجی" : "ورودی "}}
+                        {{ strlen($meta["DigitsDialed"] ?? "") > 6 ? "خروجی" : "ورودی "}}
                     </td>
                     <td class="px-6 py-4">
                         {{\Morilog\Jalali\Jalalian::forge($call->created_at->setTimezone('Asia/Tehran')->format('Y/m/d H:i:s'))->format("Y/m/d H:i:s")}}
