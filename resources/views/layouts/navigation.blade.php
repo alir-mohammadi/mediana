@@ -62,22 +62,22 @@
                        class="{{request()->routeIs('dashboard') ? $active : $deActive}}"
                        aria-current="page">وضعیت تماس‌ها</a>
                 </li>
-                <li class="{{request()->routeIs('phone-settings') ? $border :"" }}  pr-2 pl-2">
-                    <a href="{{route('phone-settings')}}"
-                       class="{{request()->routeIs('phone-settings') ? $active : $deActive}}">تنظیمات تلفن گویا</a>
-                </li>
+{{--                <li class="{{request()->routeIs('phone-settings') ? $border :"" }}  pr-2 pl-2">--}}
+{{--                    <a href="{{route('phone-settings')}}"--}}
+{{--                       class="{{request()->routeIs('phone-settings') ? $active : $deActive}}">تنظیمات تلفن گویا</a>--}}
+{{--                </li>--}}
                 <li class="{{request()->routeIs('internal-settings') ? $border :"" }}  pr-2 pl-2">
                     <a href="{{route('internal-settings')}}"
                        class="{{request()->routeIs('internal-settings') ? $active : $deActive}}">تنظیمات شماره داخلی</a>
                 </li>
-                <li class="{{request()->routeIs('timesheet-settings') ? $border :"" }}  pr-2 pl-2">
-                    <a href="{{route('timesheet-settings')}}"
-                       class="{{request()->routeIs('timesheet-settings') ? $active : $deActive}}">تنظیمات زمان‌بندی</a>
-                </li>
-                <li class="{{request()->routeIs('contacts') ? $border :"" }}  pr-2 pl-2">
-                    <a href="{{route('contacts')}}"
-                       class="{{request()->routeIs('contacts') ? $active : $deActive}}">مخاطبین</a>
-                </li>
+{{--                <li class="{{request()->routeIs('timesheet-settings') ? $border :"" }}  pr-2 pl-2">--}}
+{{--                    <a href="{{route('timesheet-settings')}}"--}}
+{{--                       class="{{request()->routeIs('timesheet-settings') ? $active : $deActive}}">تنظیمات زمان‌بندی</a>--}}
+{{--                </li>--}}
+{{--                <li class="{{request()->routeIs('contacts') ? $border :"" }}  pr-2 pl-2">--}}
+{{--                    <a href="{{route('contacts')}}"--}}
+{{--                       class="{{request()->routeIs('contacts') ? $active : $deActive}}">مخاطبین</a>--}}
+{{--                </li>--}}
             </ul>
         </div>
     </div>
