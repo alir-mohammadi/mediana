@@ -82,11 +82,13 @@
                 </th>
             </tr>
         @endif
+
+
         </tbody>
 
     </table>
 
-    {{$calls->links('vendor.pagination.bootstrap-4-rtl')}}
+    {{$calls->links()}}
     <div wire:poll.2000ms>
     </div>
 </div>
