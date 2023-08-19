@@ -133,8 +133,20 @@ class CallController extends Controller
         ]);
     }
 
-    public function outAccess()
+    public function outAccess(Request $request)
     {
+        $user = User::query()->where('email', $request->input('CalledId'))->first();
+        if (!isset($user))
+        {
+            return response() -> json([
+                'status'      => 0,
+                'status_code' => 1,
+                'message'     => 'line not found',
+                'data'        => [
+                ],
+            ], 404);
+        }
+
         return response() -> json([
             'status'      => 1,
             'status_code' => 0,
@@ -145,7 +157,7 @@ class CallController extends Controller
 
     public function outLine(Request $request)
     {
-        $user = User::query()->where('phone_number', $request->input('CalledId'))->first();
+        $user = User::query()->where('email', $request->input('CalledId'))->first();
         if (!isset($user))
         {
             return response() -> json([
