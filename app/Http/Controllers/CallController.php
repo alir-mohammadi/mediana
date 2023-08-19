@@ -136,7 +136,7 @@ class CallController extends Controller
     public function outAccess()
     {
         return response() -> json([
-            'status'      => 0,
+            'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [],
@@ -153,22 +153,30 @@ class CallController extends Controller
                 'status_code' => 1,
                 'message'     => 'line not found',
                 'data'        => [
-
                 ],
             ], 404);
         }
         return response() -> json([
-            'status'      => 0,
+            'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'line' => $user->phoneNumbers()->first()->phone_number,
+                'called_id' => $user->phoneNumbers()->first()->phone_number,
             ],
         ]);
     }
 
     public function hangout(Request $request)
     {
+        $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->first();
+
+        $line->callLogs()->create(
+            [
+                "meta_data" => $request->all(),
+                'from' => $request->input('UUID'),
+                'duration' => $request->input('AnswerTime')
+            ]);
+
         return $request->all();
     }
 }

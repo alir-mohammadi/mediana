@@ -11,15 +11,10 @@ class CallsTable extends Component
 {
     use WithPagination;
 
-    public function mount()
-    {
-
-    }
+    public $calls = [];
 
     public function render()
     {
-        $calls = Auth::user()?->calls()->orderBy('created_at','desc')->paginate(10);
-
-        return view('livewire.calls-table',['calls'=>$calls]);
+        return view('livewire.calls-table');
     }
 }
