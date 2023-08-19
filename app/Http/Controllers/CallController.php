@@ -173,7 +173,7 @@ class CallController extends Controller
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'caller_id' => $user->phoneNumbers()->first()->phone_number,
+                'caller_id' => substr($user->phoneNumbers()->first()->phone_number,1)
             ],
         ]);
     }
