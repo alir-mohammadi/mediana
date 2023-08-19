@@ -11,7 +11,7 @@ class CallController extends Controller
 
     public function incoming(Request $request)
     {
-        $phoneNumber = PhoneNumber ::query() -> where('phone_number', '0'.$request -> input('CallerId')) -> first();
+        $phoneNumber = PhoneNumber ::query() -> where('phone_number', '0'.$request -> input('CalledNumber')) -> first();
 
         if (!isset($phoneNumber)) {
             return response() -> json([
@@ -64,7 +64,7 @@ class CallController extends Controller
 
     public function redirect(Request $request)
     {
-        $phoneNumber = PhoneNumber ::query() -> where('phone_number', '0'.$request -> input('CallerId')) -> first();
+        $phoneNumber = PhoneNumber ::query() -> where('phone_number', '0'.$request -> input('CalledNumber')) -> first();
 
         if (!isset($phoneNumber)) {
             return response() -> json([
@@ -143,7 +143,7 @@ class CallController extends Controller
 
     public function outLine(Request $request)
     {
-        $user = User::query()->where('phone_number', $request->input('CalledNumber'))->first();
+        $user = User::query()->where('phone_number', $request->input('CalledId'))->first();
         if (!isset($user))
         {
             return response() -> json([
