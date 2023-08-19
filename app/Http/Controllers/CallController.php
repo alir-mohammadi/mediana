@@ -52,11 +52,12 @@ class CallController extends Controller
         }
 
         return response() -> json([
-            'status'      => 0,
+            'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'voice' => "test.wav",
+                'CallerId' => $request -> input('CalledNumber'),
+                'voice' => "mediana01.wav",
             ],
         ]);
 
@@ -127,6 +128,7 @@ class CallController extends Controller
                     2 => $redirect -> backup_redirect_phone_number,
                     default => $redirect -> redirect_phone_number
                 },
+                'CallerId' => $request -> input('CalledNumber'),
             ],
         ]);
     }

@@ -203,10 +203,3 @@
     </div>
 </div>
 
-@push('scripts')
-    <script>
-        window.livewire.on('toastMessage', (type, message) => {
-            toastr[type](message);
-        });
-    </script>
-@endpush

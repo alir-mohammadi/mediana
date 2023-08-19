@@ -17,6 +17,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "jquery": "^3.7.0",
         "toastr": "^2.1.4",
         "vazirmatn": "^33.0.3"
     }

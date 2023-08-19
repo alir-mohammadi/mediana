@@ -10,7 +10,7 @@ class ActiveTime extends Component
 
     public function mount()
     {
-        $this->activeTime = Auth()->user()->phoneNumbers()->first()->activeTime->toArray();
+        $this->activeTime = Auth()->user()?->phoneNumbers()->first()->activeTime?->toArray();
      }
 
     public function render()

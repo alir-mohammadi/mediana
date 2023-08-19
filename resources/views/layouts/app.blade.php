@@ -11,6 +11,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -33,6 +34,14 @@
                 {{ $slot }}
             </main>
             @livewireScripts
+            <script>
+                window.livewire.on('toastMessage', (type, message) => {
+                    console.log(type);
+                    window.toastr.options.rtl = true;
+                    window.toastr.options.positionClass = 'toast-bottom-right';
+                    window.toastr[type](message.message);
+                });
+            </script>
         </div>
     </body>
 </html>

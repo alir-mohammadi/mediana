@@ -64,6 +64,8 @@ class InternalSettings extends Component
 
         }
 
+        $this->emit('toastMessage', 'success', ["message" => 'Settings successfully saved.']);
+
         session()->flash('message', 'Settings successfully saved.');
     }
 
