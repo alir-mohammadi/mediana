@@ -11,11 +11,11 @@ class CallController extends Controller
 
     public function incoming(Request $request)
     {
-        $phoneNumber = PhoneNumber ::query() -> where('phone_number', $request -> input('line')) -> first();
+        $phoneNumber = PhoneNumber ::query() -> where('phone_number', $request -> input('CallerId')) -> first();
 
         if (!isset($phoneNumber)) {
             return response() -> json([
-                'status'      => false,
+                'status'      => 0,
                 'status_code' => 2,
                 'message'     => 'line not found',
                 'data'        => [
@@ -31,7 +31,7 @@ class CallController extends Controller
                 if ($activeTime -> from_time <= now() -> format('H:i:s') && $activeTime -> to_time >= now() -> format('H:i:s')) {
                 } else {
                     return response() -> json([
-                        'status'      => false,
+                        'status'      => 0,
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
@@ -41,7 +41,7 @@ class CallController extends Controller
                 }
             } else {
                 return response() -> json([
-                    'status'      => false,
+                    'status'      => 0,
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
@@ -52,11 +52,11 @@ class CallController extends Controller
         }
 
         return response() -> json([
-            'status'      => true,
+            'status'      => 0,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'voice' => "sample.mp3",
+                'voice' => "test.wav",
             ],
         ]);
 
@@ -64,11 +64,11 @@ class CallController extends Controller
 
     public function redirect(Request $request)
     {
-        $phoneNumber = PhoneNumber ::query() -> where('phone_number', $request -> input('line')) -> first();
+        $phoneNumber = PhoneNumber ::query() -> where('phone_number', $request -> input('CallerId')) -> first();
 
         if (!isset($phoneNumber)) {
             return response() -> json([
-                'status'      => false,
+                'status'      => 0,
                 'status_code' => 2,
                 'message'     => 'line not found',
                 'data'        => [
@@ -84,7 +84,7 @@ class CallController extends Controller
                 if ($activeTime -> from_time <= now() -> format('H:i:s') && $activeTime -> to_time >= now() -> format('H:i:s')) {
                 } else {
                     return response() -> json([
-                        'status'      => false,
+                        'status'      => 0,
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
@@ -94,7 +94,7 @@ class CallController extends Controller
                 }
             } else {
                 return response() -> json([
-                    'status'      => false,
+                    'status'      => 0,
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
@@ -104,25 +104,25 @@ class CallController extends Controller
             }
         }
 
-        $redirect = $phoneNumber -> redirect() -> query() -> where('number', $request -> input('input')) -> first();
+        $redirect = $phoneNumber -> redirects()  -> where('number', $request -> input('Input')) -> first();
 
         if (!isset($redirect)) {
             return response() -> json([
-                'status'      => false,
+                'status'      => 0,
                 'status_code' => 4,
                 'message'     => 'redirect not found',
                 'data'        => [
-                    'voice' => "sample.mp3",
+                    'voice' => "invalid-digit.wav",
                 ],
             ], 404);
         }
 
         return response() -> json([
-            'status'      => true,
+            'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'line' => match ($request -> input('try', 1)) {
+                'redirect_number' => match ($request -> input('Try', 1)) {
                     1 => $redirect -> redirect_phone_number,
                     2 => $redirect -> backup_redirect_phone_number,
                     default => $redirect -> redirect_phone_number
@@ -134,7 +134,7 @@ class CallController extends Controller
     public function outAccess()
     {
         return response() -> json([
-            'status'      => true,
+            'status'      => 0,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [],
@@ -143,11 +143,11 @@ class CallController extends Controller
 
     public function outLine(Request $request)
     {
-        $user = User::query()->where('phone_number', $request->input('from'))->first();
+        $user = User::query()->where('phone_number', $request->input('CalledNumber'))->first();
         if (!isset($user))
         {
             return response() -> json([
-                'status'      => false,
+                'status'      => 0,
                 'status_code' => 1,
                 'message'     => 'line not found',
                 'data'        => [
@@ -156,7 +156,7 @@ class CallController extends Controller
             ], 404);
         }
         return response() -> json([
-            'status'      => true,
+            'status'      => 0,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
