@@ -50,14 +50,13 @@ class CallController extends Controller
                 ], 400);
             }
         }
-
         return response() -> json([
             'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
                 'caller_id' => $request -> input('CalledNumber'),
-                'voice' => config('voice.'.\Auth::id()),
+                'voice' => config('voice.'.$phoneNumber->owner_id),
             ],
         ]);
 
