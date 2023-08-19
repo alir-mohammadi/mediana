@@ -19,5 +19,5 @@ Route::prefix('call')->group(function () {
     Route ::post('/redirect', [\App\Http\Controllers\CallController::class, 'redirect']) -> name('redirect');
     Route ::post('/outgoing/access', [\App\Http\Controllers\CallController::class, 'outAccess']) -> name('out-access');
     Route ::post('/outgoing/line', [\App\Http\Controllers\CallController::class, 'outLine']) -> name('out-line');
-    Route ::post('/hangout', [\App\Http\Controllers\CallController::class, 'hangout']) -> name('hangout');
+    Route ::post('/hangup', [\App\Http\Controllers\CallController::class, 'hangout']) -> name('hangout');
 });
