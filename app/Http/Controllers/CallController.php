@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\PhoneNumber;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Morilog\Jalali\CalendarUtils;
 
 class CallController extends Controller
 {
+    public $week = [
+        1 => 3,
+        2 => 4,
+        3 => 5,
+        4 => 6,
+        5 => 7,
+        6 => 1,
+        7 => 2
+    ];
 
     public function incoming(Request $request)
     {
@@ -27,8 +37,8 @@ class CallController extends Controller
         $activeTime = $phoneNumber -> activeTime() -> first();
 
         if (isset($activeTime)) {
-            if ($activeTime -> from_day <= now() -> dayOfWeek && $activeTime -> to_day >= now() -> dayOfWeek) {
-                if ($activeTime -> from_time <= now() -> format('H:i:s') && $activeTime -> to_time >= now() -> format('H:i:s')) {
+            if ($activeTime -> from_day <= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek] && $activeTime -> to_day >= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek]) {
+                if ($activeTime -> from_time <= now()->timezone('Asia/Tehran') -> format('H:i:s') && $activeTime -> to_time >= now()->timezone('Asia/Tehran') -> format('H:i:s')) {
                 } else {
                     return response() -> json([
                         'status'      => 0,
