@@ -135,7 +135,7 @@ class CallController extends Controller
 
     public function outAccess(Request $request)
     {
-        $user = User::query()->where('email', $request->input('CalledId'))->first();
+        $user = User::query()->where('email', '0'.$request->input('CalledId'))->first();
         if (!isset($user))
         {
             return response() -> json([
@@ -157,7 +157,7 @@ class CallController extends Controller
 
     public function outLine(Request $request)
     {
-        $user = User::query()->where('email', $request->input('CalledId'))->first();
+        $user = User::query()->where('email', '0'.$request->input('CalledId'))->first();
         if (!isset($user))
         {
             return response() -> json([
