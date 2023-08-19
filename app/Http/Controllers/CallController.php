@@ -57,7 +57,7 @@ class CallController extends Controller
             'message'     => 'success',
             'data'        => [
                 'caller_id' => $request -> input('CalledNumber'),
-                'voice' => "mediana01.wav",
+                'voice' => config('voice.'.\Auth::id()),
             ],
         ]);
 
@@ -181,6 +181,20 @@ class CallController extends Controller
     public function hangout(Request $request)
     {
         $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->first();
+
+        $line->callLogs()->create(
+            [
+                "meta_data" => $request->all(),
+                'from' => $request->input('UUID'),
+                'duration' => $request->input('AnswerTime')
+            ]);
+
+        return $request->all();
+    }
+
+    public function outHangout(Request $request)
+    {
+        $line = User::query()->where('email', '0'.$request->input('CallerIdNumber'))->first()?->phoneNumbers()->first()->phone_number;
 
         $line->callLogs()->create(
             [
