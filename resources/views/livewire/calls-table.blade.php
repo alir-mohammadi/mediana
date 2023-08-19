@@ -88,7 +88,7 @@
 
     </table>
 
-    {{$calls->links()}}
+    {{$calls->links('vendor.pagination.simple-tailwind')}}
     <div wire:poll.2000ms>
     </div>
 </div>
