@@ -45,7 +45,7 @@ class CallController extends Controller
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
-                            'voice' => "sample.mp3",
+                            'voice' => "inactive.wav",
                         ],
                     ], 400);
                 }
@@ -55,7 +55,7 @@ class CallController extends Controller
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
-                        'voice' => "sample.mp3",
+                        'voice' => "inactive.wav",
                     ],
                 ], 400);
             }
@@ -90,7 +90,7 @@ class CallController extends Controller
         $activeTime = $phoneNumber -> activeTime() -> first();
 
         if (isset($activeTime)) {
-            if ($activeTime -> from_day <= now() -> dayOfWeek && $activeTime -> to_day >= now() -> dayOfWeek) {
+            if ($activeTime -> from_day <= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek] && $activeTime -> to_day >= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek]) {
                 if ($activeTime -> from_time <= now() -> format('H:i:s') && $activeTime -> to_time >= now() -> format('H:i:s')) {
                 } else {
                     return response() -> json([
@@ -98,7 +98,7 @@ class CallController extends Controller
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
-                            'voice' => "sample.mp3",
+                            'voice' => "inactive.wav",
                         ],
                     ], 400);
                 }
@@ -108,7 +108,7 @@ class CallController extends Controller
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
-                        'voice' => "sample.mp3",
+                        'voice' => "inactive.wav",
                     ],
                 ], 400);
             }
