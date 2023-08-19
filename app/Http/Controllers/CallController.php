@@ -56,7 +56,7 @@ class CallController extends Controller
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'CallerId' => $request -> input('CalledNumber'),
+                'caller_id' => $request -> input('CallerId'),
                 'voice' => "mediana01.wav",
             ],
         ]);
@@ -128,7 +128,7 @@ class CallController extends Controller
                     2 => $redirect -> backup_redirect_phone_number,
                     default => $redirect -> redirect_phone_number
                 },
-                'CallerId' => $request -> input('CalledNumber'),
+                'caller_id' => $request -> input('CallerId'),
             ],
         ]);
     }
