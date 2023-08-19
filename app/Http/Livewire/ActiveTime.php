@@ -26,5 +26,8 @@ class ActiveTime extends Component
             'from_time' => $this->activeTime['from_time'],
             'to_time'   => $this->activeTime['to_time'],
         ]);
+
+        $this->emit('toastMessage', 'success', ["message" => 'تنظیمات با موفقیت ذخیره شد.']);
+
     }
 }
