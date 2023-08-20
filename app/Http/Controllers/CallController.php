@@ -16,7 +16,7 @@ class CallController extends Controller
         4 => 6,
         5 => 7,
         6 => 1,
-        7 => 2
+        0 => 2
     ];
 
     public function incoming(Request $request)
@@ -35,7 +35,6 @@ class CallController extends Controller
         }
 
         $activeTime = $phoneNumber -> activeTime() -> first();
-
         if (isset($activeTime)) {
             if ($activeTime -> from_day <= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek] && $activeTime -> to_day >= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek]) {
                 if ($activeTime -> from_time <= now()->timezone('Asia/Tehran') -> format('H:i:s') && $activeTime -> to_time >= now()->timezone('Asia/Tehran') -> format('H:i:s')) {
@@ -147,13 +146,16 @@ class CallController extends Controller
         $user = User::query()->where('email', '0'.$request->input('CallerId'))->first();
         if (!isset($user))
         {
-            return response() -> json([
-                'status'      => 0,
-                'status_code' => 1,
-                'message'     => 'line not found',
-                'data'        => [
-                ],
-            ], 404);
+            $line = PhoneNumber::query()->whereJsonContains('allowed_numbers', '0'.$request->input('CallerId'))->first();
+            if (!isset($line)) {
+                return response() -> json([
+                    'status'      => 0,
+                    'status_code' => 1,
+                    'message'     => 'line not found',
+                    'data'        => [
+                    ],
+                ], 404);
+            }
         }
 
         return response() -> json([
@@ -169,20 +171,23 @@ class CallController extends Controller
         $user = User::query()->where('email', '0'.$request->input('CallerId'))->first();
         if (!isset($user))
         {
-            return response() -> json([
-                'status'      => 0,
-                'status_code' => 1,
-                'message'     => 'line not found',
-                'data'        => [
-                ],
-            ], 404);
+            $line = PhoneNumber::query()->whereJsonContains('allowed_numbers', '0'.$request->input('CallerId'))->first();
+            if (!isset($line)) {
+                return response() -> json([
+                    'status'      => 0,
+                    'status_code' => 1,
+                    'message'     => 'line not found',
+                    'data'        => [
+                    ],
+                ], 404);
+            }
         }
         return response() -> json([
             'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'caller_id' => substr($user->phoneNumbers()->first()->phone_number,1)
+                'caller_id' => substr(($user?->phoneNumbers()->first()->phone_number ?? $line->phone_number),1)
             ],
         ]);
     }
