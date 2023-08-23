@@ -7,5 +7,7 @@ return [
     7 => 'ivr-mediana-phone.mp3',
     4 => 'ivr-mediana-phone.mp3',
     8 => 'ivr-mediana-phone.mp3',
-    9 => 'ivr-mediana-phone.mp3',
+    9 => 'ivr-sanicamping-1-phone.mp3',
+    11 => 'mediana01.mp3',
+    12 => 'mediana01.mp3',
 ];
