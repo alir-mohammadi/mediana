@@ -36,17 +36,16 @@
         </thead>
         <tbody class="border-gray-300 border-t-0 rounded">
         @php
-            $calls = Auth::user()?->phoneNumbers()->first()->callLogs()->paginate(10);
         @endphp
         @if($calls instanceof \Illuminate\Pagination\LengthAwarePaginator && !$calls->isEmpty())
             @foreach($calls as $call)
                 @php
-                    $meta = $call->meta_data
+                    $meta = $call['meta_data']
                 @endphp
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
                     <th scope="row"
-                        class="{{ $meta["HangupCause"] == "NORMAL_CLEARING" ? 'text-green-400':'text-red-600' }} text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$meta["HangupCause"]  == "NORMAL_CLEARING" ? "پاسخ‌داده‌شده":"پاسخ‌داده‌نشده"}}
+                        class="{{ $meta["HangupCause"] ? 'text-green-400':'text-red-600' }} text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{$meta["HangupCause"]   ? "پاسخ‌داده‌شده":"پاسخ‌داده‌نشده"}}
                     </th>
                     <td class="px-6 py-4">
                         {{$meta["Duration"]}}
@@ -64,7 +63,7 @@
                         {{ strlen($meta["DigitsDialed"] ?? "") > 6 ? "خروجی" : "ورودی "}}
                     </td>
                     <td class="px-6 py-4">
-                        {{\Morilog\Jalali\Jalalian::forge($call->created_at->setTimezone('Asia/Tehran')->format('Y/m/d H:i:s'))->format("Y/m/d H:i:s")}}
+                        {{\Morilog\Jalali\Jalalian::forge(Carbon\Carbon::parse($meta['created_at'])->setTimezone('Asia/Tehran')->format('Y/m/d H:i:s'))->format("Y/m/d H:i:s")}}
                     </td>
                     <td class="px-6 py-4 text-right">
                         <a href="#" class="font-medium text-green-600 dark:text-green-500 hover:underline">پخش</a>
