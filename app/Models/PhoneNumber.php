@@ -33,4 +33,9 @@ class PhoneNumber extends Model
     {
         return $this -> hasOne(ActiveTime::class);
     }
+
+    public function operators(): HasMany
+    {
+        return $this -> hasMany(Operator::class);
+    }
 }

@@ -30,5 +30,10 @@ class PanelController extends Controller
         return view('phone-settings');
     }
 
+    public function operators()
+    {
+        return view('operators');
+    }
+
 
 }

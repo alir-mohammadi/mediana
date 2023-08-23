@@ -143,10 +143,22 @@ class CallController extends Controller
 
     public function outAccess(Request $request)
     {
-        $user = User::query()->where('email', '0'.$request->input('CallerId'))->first();
+        $user = User::query()->where('email', '0'.$request->input('CallerId'))->whereHas('phoneNumbers',function ($q) use
+        (
+            $request
+        ) {
+            $q->where('phone_number','0'.$request->input('CalledNumber'));
+        }
+        )->first();
         if (!isset($user))
         {
-            $line = PhoneNumber::query()->whereJsonContains('allowed_numbers', '0'.$request->input('CallerId'))->first();
+            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('CalledNumber'))->whereHas('operators',function ($q) use
+            (
+                $request
+            ) {
+                $q->where('phone_number','0'.$request->input('CallerId'));
+
+            })->first();
             if (!isset($line)) {
                 return response() -> json([
                     'status'      => 0,
@@ -157,7 +169,6 @@ class CallController extends Controller
                 ], 404);
             }
         }
-
         return response() -> json([
             'status'      => 1,
             'status_code' => 0,
@@ -168,10 +179,22 @@ class CallController extends Controller
 
     public function outLine(Request $request)
     {
-        $user = User::query()->where('email', '0'.$request->input('CallerId'))->first();
+        $user = User::query()->where('email', '0'.$request->input('CallerId'))->whereHas('phoneNumbers',function ($q) use
+        (
+            $request
+        ) {
+            $q->where('phone_number','0'.$request->input('CalledNumber'));
+        }
+        )->first();
         if (!isset($user))
         {
-            $line = PhoneNumber::query()->whereJsonContains('allowed_numbers', '0'.$request->input('CallerId'))->first();
+            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('CalledNumber'))->whereHas('operators',function ($q) use
+            (
+                $request
+            ) {
+                $q->where('phone_number','0'.$request->input('CallerId'));
+
+            })->first();
             if (!isset($line)) {
                 return response() -> json([
                     'status'      => 0,

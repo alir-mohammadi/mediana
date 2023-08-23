@@ -27,6 +27,7 @@ Route::get('/phone-settings',[\App\Http\Controllers\PanelController::class,'phon
 Route::get('/internal-settings',[\App\Http\Controllers\PanelController::class,'internalSettings'])->middleware(['auth', 'verified'])->name('internal-settings');
 Route::get('/timesheet-settings',[\App\Http\Controllers\PanelController::class,'timesheetSettings'])->middleware(['auth', 'verified'])->name('timesheet-settings');
 Route::get('/contacts',[\App\Http\Controllers\PanelController::class,'contacts'])->middleware(['auth', 'verified'])->name('contacts');
+Route::get('/operators',[\App\Http\Controllers\PanelController::class,'operators'])->middleware(['auth', 'verified'])->name('operators');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
