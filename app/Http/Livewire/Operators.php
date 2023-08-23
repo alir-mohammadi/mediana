@@ -11,6 +11,8 @@ class Operators extends Component
 
     use WithPagination;
 
+    protected $listeners = ['operatorAdded' => 'render'];
+
     public $input = [
         'name' => '',
         'phone_number' => '',

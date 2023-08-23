@@ -30,5 +30,7 @@ class AddOperator extends Component
             'active' => true,
             'outgoing_access' => true,
         ];
+
+        $this->emit('operatorAdded');
     }
 }

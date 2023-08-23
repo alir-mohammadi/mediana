@@ -57,7 +57,7 @@
                         {{$meta["DestinationNumber"]}}
                     </td>
                     <td class="px-6 py-4">
-                        {{($meta["DigitsDialed"] ?? null) != 'none' ? :"-"}}
+                        {{($meta["DigitsDialed"] ?? null) != 'none' ? $meta["DigitsDialed"]:"-"}}
                     </td>
                     <td class="px-6 py-4">
                         {{ strlen($meta["DigitsDialed"] ?? "") > 6 ? "خروجی" : "ورودی "}}

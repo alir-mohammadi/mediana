@@ -22,6 +22,7 @@
         <tbody>
         @if($operators instanceof \Illuminate\Pagination\LengthAwarePaginator && !$operators->isEmpty())
             @foreach($operators as $operator)
+                <tr>
                 <th scope="col" class="px-6 py-3">
                     {{$operator->phone_number}}
                 </th>
@@ -46,6 +47,7 @@
                         حذف
                     </button>
                 </th>
+                </tr>
             @endforeach
         @else
             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 ">
