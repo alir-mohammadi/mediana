@@ -156,7 +156,7 @@ class CallController extends Controller
             (
                 $request
             ) {
-                $q->where('phone_number','0'.$request->input('CallerId'));
+                $q->where('phone_number','0'.$request->input('CallerId'))->where('output_access',true);
 
             })->first();
             if (!isset($line)) {
@@ -192,7 +192,7 @@ class CallController extends Controller
             (
                 $request
             ) {
-                $q->where('phone_number','0'.$request->input('CallerId'));
+                $q->where('phone_number','0'.$request->input('CallerId'))->where('output_access',true);
 
             })->first();
             if (!isset($line)) {
