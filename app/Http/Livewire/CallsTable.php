@@ -28,7 +28,7 @@ class CallsTable extends Component
                         'HangupCause'       => $calls -> where('HangupCause', 'NORMAL_CLEARING') -> count(),
                         'Duration'          => $calls -> max('Duration'),
                         'CallerIdNumber'    => $calls -> first()[ 'CallerIdNumber' ],
-                        'DestinationNumber' => $calls -> last()[ 'DestinationNumber' ],
+                        'DestinationNumber' => $calls -> sortBy('StartTime')->last()[ 'DestinationNumber' ],
                         'DigitsDialed'      => $calls -> firstWhere('DigitsDialed', '!=',
                                 'none')[ 'DigitsDialed' ] ?? null,
                         'created_at'        => $calls -> first()[ 'created_at' ],
