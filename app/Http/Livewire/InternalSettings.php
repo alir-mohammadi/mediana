@@ -48,7 +48,7 @@ class InternalSettings extends Component
                 'backup' => 'nullable|numeric|digits:11',
             ]);
             if ($validate->fails()) {
-                $this->emit('toastMessage', 'validation_error', $validate->errors()->first());
+                $this->emit('toastMessage', 'error', $validate->errors()->first());
                 return;
             }
            $line->redirects()->updateOrCreate(
