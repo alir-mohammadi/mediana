@@ -48,7 +48,7 @@ class InternalSettings extends Component
                 'backup' => 'nullable|numeric|digits:11',
             ]);
             if ($validate->fails()) {
-                $this->emit('toastMessage', 'error', 'شماره وارد شده نامعتبر است.');
+                $this->emit('toastMessage', 'error', ["message" =>'شماره وارد شده نامعتبر است.']);
                 return;
             }
            $line->redirects()->updateOrCreate(
