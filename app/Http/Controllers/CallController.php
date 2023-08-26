@@ -44,7 +44,7 @@ class CallController extends Controller
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
-                            'voice' => "inactive.wav",
+                            'voice' => "ivr-sanicamping-1.wav",
                         ],
                     ], 400);
                 }
@@ -54,7 +54,7 @@ class CallController extends Controller
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
-                        'voice' => "inactive.wav",
+                        'voice' => "ivr-sanicamping-1.wav",
                     ],
                 ], 400);
             }
@@ -90,14 +90,14 @@ class CallController extends Controller
 
         if (isset($activeTime)) {
             if ($activeTime -> from_day <= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek] && $activeTime -> to_day >= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek]) {
-                if ($activeTime -> from_time <= now() -> format('H:i:s') && $activeTime -> to_time >= now() -> format('H:i:s')) {
+                if ($activeTime -> from_time <= now()->timezone('Asia/Tehran') -> format('H:i:s') && $activeTime -> to_time >= now()->timezone('Asia/Tehran') -> format('H:i:s')) {
                 } else {
                     return response() -> json([
                         'status'      => 0,
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
-                            'voice' => "inactive.wav",
+                            'voice' => "ivr-sanicamping-1.wav",
                         ],
                     ], 400);
                 }
@@ -107,7 +107,7 @@ class CallController extends Controller
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
-                        'voice' => "inactive.wav",
+                        'voice' => "ivr-sanicamping-1.wav",
                     ],
                 ], 400);
             }
