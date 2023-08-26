@@ -44,7 +44,7 @@ class InternalSettings extends Component
         $line = Auth::user()?->phoneNumbers()->first();
         foreach ($this->internals as $key => $internal) {
             $validate = Validator::make($internal, [
-                'main' => 'required|numeric|digits:11',
+                'main' => 'nullable|numeric|digits:11',
                 'backup' => 'nullable|numeric|digits:11',
             ]);
             if ($validate->fails()) {
