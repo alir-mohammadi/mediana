@@ -20,17 +20,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.1.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"1.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.1.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"1.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="pt-2 w-3/4 pb-2">
                 <p class="text-gray-500">
@@ -46,17 +42,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.2.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"2.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.2.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"2.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="border-b-2 pt-3 mb-3"></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -65,17 +57,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.3.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"3.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.3.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"3.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -84,17 +72,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.4.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"4.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.4.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"4.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -103,17 +87,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.5.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"5.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.5.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"5.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -122,17 +102,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.6.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"6.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.6.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"6.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -141,17 +117,13 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.7.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"7.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.7.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"7.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -160,17 +132,12 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.8.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"8.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.8.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+               <x-select-operator :inputName='"8.backup"' :internals="$internals" :operators="$operators"/>
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -179,17 +146,29 @@
 
                     منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.9.main" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"9.main"' :internals="$internals" :operators="$operators"/>
+
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-                <div>
-                    <input wire:model="internals.9.backup" type="text" id="default-input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+                <x-select-operator :inputName='"9.backup"' :internals="$internals" :operators="$operators"/>
+
+            </div>
+
+ <div class="border-b-2 pt-3 mb-3 "></div>
+            <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
+                <p>
+                   در صورت عدم انتخاب
+
+                    منتقل شود به
+                </p>
+                <x-select-operator :inputName='"0.main"' :internals="$internals" :operators="$operators"/>
+
+                <p>
+                    در صورت عدم پاسخگویی منتقل شود به
+                </p>
+                <x-select-operator :inputName='"0.backup"' :internals="$internals" :operators="$operators"/>
+
             </div>
 
 

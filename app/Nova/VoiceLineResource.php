@@ -27,7 +27,7 @@ class VoiceLineResource extends Resource
         return [
             ID ::make() -> sortable(),
 
-            Select::make('Size')->options(EnumsVoiceLine::getAllValues()),
+            Select::make('Type','type')->options(EnumsVoiceLine::getAllValues()),
 
             Text ::make('Name')
                 -> sortable()

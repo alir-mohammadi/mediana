@@ -114,7 +114,7 @@ class CallController extends Controller
             }
         }
 
-        $redirect = $phoneNumber -> redirects()  -> where('number', $request -> input('Input')) -> first();
+        $redirect = $phoneNumber -> redirects()  -> where('number', $request -> input('Input' , '0')) -> first();
 
         if (!isset($redirect)) {
             return response() -> json([

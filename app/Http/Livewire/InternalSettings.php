@@ -13,6 +13,8 @@ class InternalSettings extends Component
 
     public $internals =[];
 
+    public $operators =[];
+
     public function mount()
     {
         /**
@@ -21,6 +23,11 @@ class InternalSettings extends Component
          * @var PhoneNumber $line The content of the line.
          */
         $line = Auth::user()?->phoneNumbers()->first();
+
+        $this->operators = $line->operators()->get()->map(fn($item) => [
+            'name' => $item->name,
+            'phone_number' => $item->phone_number,
+        ])->keyBy('phone_number')->toArray();
 
         $this->internals= $line->redirects()->get()->map(fn($item) => [
             'main' => $item->redirect_phone_number,
