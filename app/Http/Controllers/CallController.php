@@ -67,7 +67,7 @@ class CallController extends Controller
             'data'        => [
                 'caller_id' => $request -> input('CalledNumber'),
                 'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::income)->value('name'),
-                "ivr_timeout" => "45",
+                "ivr_timeout" => "4",
                 "ivr_timeout_method" => $phoneNumber->redirects()->where('number', '0')->exists() ? "forward" : "hangup",
                 "ivr_timeout_forward_number" => $phoneNumber -> redirects() -> where('number',
                     '0') -> value('redirect_phone_number'),
