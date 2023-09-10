@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\VoiceLine;
 use App\Models\PhoneNumber;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class CallController extends Controller
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
-                            'voice' => "ivr-sanicamping-1.wav",
+                            'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::deactivate)->value('name'),
                         ],
                     ], 400);
                 }
@@ -54,7 +55,7 @@ class CallController extends Controller
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
-                        'voice' => "ivr-sanicamping-1.wav",
+                        'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::deactivate)->value('name'),
                     ],
                 ], 400);
             }
@@ -65,7 +66,7 @@ class CallController extends Controller
             'message'     => 'success',
             'data'        => [
                 'caller_id' => $request -> input('CalledNumber'),
-                'voice' => config('voice.'.$phoneNumber->owner_id),
+                'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::income)->value('name'),
             ],
         ]);
 
@@ -97,7 +98,7 @@ class CallController extends Controller
                         'status_code' => 3,
                         'message'     => 'line deactivate',
                         'data'        => [
-                            'voice' => "ivr-sanicamping-1.wav",
+                            'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::deactivate)->value('name'),
                         ],
                     ], 400);
                 }
@@ -107,7 +108,7 @@ class CallController extends Controller
                     'status_code' => 3,
                     'message'     => 'line deactivate',
                     'data'        => [
-                        'voice' => "ivr-sanicamping-1.wav",
+                        'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::deactivate)->value('name'),
                     ],
                 ], 400);
             }
