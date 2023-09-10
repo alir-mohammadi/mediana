@@ -30,10 +30,9 @@ class Operators extends Component
         Operator::find($id) -> delete();
     }
 
-    public function edit($id)
+    public function editModel($id)
     {
         $this->input = Operator::find($id)?->toArray();
-
         $this->emit('showModal');
     }
 }

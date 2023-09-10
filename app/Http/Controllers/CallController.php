@@ -31,6 +31,13 @@ class CallController extends Controller
                 'message'     => 'line not found',
                 'data'        => [
                     'voice' => "sample.mp3",
+                    "ivr_timeout" => "45",
+                    "ivr_timeout_method" => $phoneNumber->redirects()->where('number', '0')->exists() ? "forward" : "hangup",
+                    "ivr_timeout_forward_number" => $phoneNumber -> redirects() -> where('number',
+                        '0') -> value('redirect_phone_number'),
+                    "instant_forward" => $phoneNumber->direct ? 1 : 0,
+                    "instant_forward_number" => $phoneNumber -> redirects() -> where('number',
+                        '0') -> value('redirect_phone_number'),
                 ],
             ], 404);
         }
@@ -132,7 +139,7 @@ class CallController extends Controller
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'redirect_number' => match ($request -> input('Try', 1)) {
+                'forward_number' => match ($request -> input('Try', 1)) {
                     1 => $redirect -> redirect_phone_number,
                     2 => $redirect -> backup_redirect_phone_number,
                     default => $redirect -> redirect_phone_number
