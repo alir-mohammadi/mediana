@@ -36,7 +36,7 @@
                     {{$operator->outgoing_access ? "دارد":"ندارد"}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    <button wire:click="edit({{$operator->id}})"
+                    <button wire:click="editModel({{$operator->id}})"
                             type="button"
                             class="p-2 focus:outline-none text-green-400 bg-none border-2 border-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
                         ویرایش
@@ -118,17 +118,25 @@
 
                         <button wire:click="save" type="submit" data-modal-hide="edit-modal"
                                 class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            افزودن
+                            ویرایش
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<script>
+    @push('scripts')
+        <script>
     window.livewire.on('showModal', () => {
-        console.log('sa');
-        $('#edit-modal').modal('show');
+        modal = new window.Modal(document.getElementById('edit-modal'));
+        modal.show();
+    });
+    window.livewire.on('hideModal', () => {
+        modal = new window.Modal(document.getElementById('edit-modal'));
+        document.querySelector(".z-40").remove();
+        modal.hide();
     });
 </script>
+    @endpush
+
 </div>

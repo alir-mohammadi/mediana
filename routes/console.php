@@ -19,14 +19,14 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('test', function () {
-    foreach (config('voice') as $key =>$v)
+    foreach (\App\Models\RedirectNumber::all() as $key =>$v)
     {
-        if (!empty(\App\Models\User::find($key)?->phoneNumbers()?->first()?->id)) {
-            \App\Models\VoiceLine ::create([
-                'type'            => \App\Enums\VoiceLine::income,
-                'name'            => $v,
-                'phone_number_id' => \App\Models\User ::find($key) ?-> phoneNumbers() ?-> first() ?-> id
-            ]);
-        }
+        $operator = \App\Models\Operator::query()->where('phone_number_id', $v->phone_number_id)->where('phone_number', $v->redirect_phone_number)->first();
+        $operatorB = \App\Models\Operator::query()->where('phone_number_id', $v->phone_number_id)->where('phone_number', $v->backup_redirect_phone_number)->first();
+
+        $v->update([
+            'redirect_phone_number' => $operator?->id,
+            'backup_redirect_phone_number' => $operatorB?->id,
+        ]);
     }
 })->purpose('test');

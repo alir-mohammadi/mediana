@@ -13,6 +13,7 @@ class Operators extends Component
 
     protected $listeners = ['operatorAdded' => 'render'];
 
+    public $selectedOperatorId = null;
     public $input = [
         'name' => '',
         'phone_number' => '',
@@ -33,6 +34,13 @@ class Operators extends Component
     public function editModel($id)
     {
         $this->input = Operator::find($id)?->toArray();
+        $this->selectedOperatorId = $id;
         $this->emit('showModal');
+    }
+
+    public function save()
+    {
+        Operator::where('id', $this->selectedOperatorId)->update($this->input);
+        $this->emit('hideModal');
     }
 }

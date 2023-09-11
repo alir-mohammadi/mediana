@@ -18,6 +18,7 @@ class PhoneNumber extends Model
         'owner_id',
         'active',
         'package',
+        'direct'
     ];
 
     public function redirects(): HasMany

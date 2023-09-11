@@ -1,6 +1,6 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900 mb-4">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center">
+        <a href="{{route('dashboard')}}" class="flex items-center">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="91" height="72" viewBox="0 0 91 72" fill="none">
                     <path

@@ -6,7 +6,7 @@ enum VoiceLine: string
 {
     public static function getAllValues(): array
     {
-        return array_column(self::cases(), 'value');
+        return collect(array_column(self::cases(),'value'))->mapWithKeys(fn($value) => [$value =>  $value])->toArray();
     }
     case  income = 'income';
     case redirect = 'redirect';

@@ -134,16 +134,31 @@ class CallController extends Controller
             ], 404);
         }
 
+        $number = match ($request -> input('Try', 1)) {
+            1 => $redirect -> operator() -> value('phone_number'),
+            2 => $redirect -> backupOperator() -> value('phone_number'),
+            default => null
+        };
+        if (empty($number))
+        {
+            if (!isset($redirect)) {
+                return response() -> json([
+                    'status'      => 0,
+                    'status_code' => 3,
+                    'message'     => 'line deactivate',
+                    'data'        => [
+                        'voice' => $phoneNumber->voiceLines()->where('type',VoiceLine::deactivate)->value('name'),
+                    ],
+                ], 400);
+            }
+        }
+
         return response() -> json([
             'status'      => 1,
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'forward_number' => match ($request -> input('Try', 1)) {
-                    1 => $redirect -> redirect_phone_number,
-                    2 => $redirect -> backup_redirect_phone_number,
-                    default => $redirect -> redirect_phone_number
-                },
+                'forward_number' =>$number,
                 'caller_id' => $request -> input('CalledNumber'),
             ],
         ]);

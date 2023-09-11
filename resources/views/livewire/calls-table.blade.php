@@ -48,7 +48,7 @@
                         {{$meta["HangupCause"]   ? "پاسخ‌داده‌شده":"پاسخ‌داده‌نشده"}}
                     </th>
                     <td class="px-6 py-4">
-                        {{$meta["Duration"]}}
+                        {{gmdate("i:s",$meta["Duration"])}}
                     </td>
                     <td class="px-6 py-4">
                         {{$meta["CallerIdNumber"]}}

@@ -137,7 +137,7 @@
                 <p>
                     در صورت عدم پاسخگویی منتقل شود به
                 </p>
-               <x-select-operator :inputName='"8.backup"' :internals="$internals" :operators="$operators"/>
+                <x-select-operator :inputName='"8.backup"' :internals="$internals" :operators="$operators"/>
             </div>
             <div class="border-b-2 pt-3 mb-3 "></div>
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
@@ -155,23 +155,63 @@
 
             </div>
 
- <div class="border-b-2 pt-3 mb-3 "></div>
+
+        </div>
+
+
+    </div>
+    <div class="border-0 pt-3 mb-3 "></div>
+    <div
+        class=" p-4 w-full bg-gray-50 border-2 border-gray-300 rounded-lg">
+
+
+        <div class="flex p-4 pt-2  flex-col  gap-2">
+
             <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
                 <p>
-                   در صورت عدم انتخاب
+                    در صورت عدم انتخاب
 
                     منتقل شود به
                 </p>
                 <x-select-operator :inputName='"0.main"' :internals="$internals" :operators="$operators"/>
 
+            </div>
+        </div>
+        <div>
+            <p class="text-gray-500 ">
+                در صورتی که تماس‌گیرنده پس از پخش منوی تعاملی هیچ دکمه‌ای را انتخاب نکند، تماس به صورت خودکار به این شماره منتقل خواهد شد.
+            </p>
+        </div>
+    </div>
+    <div class="border-0 pt-3 mb-3 "></div>
+    <div
+        class=" p-4 w-full bg-gray-50 border-2 border-gray-300 rounded-lg">
+
+
+
+        <div class="flex p-4 pt-2  flex-col  gap-2">
+
+            <div>
+            <label class="relative inline-flex items-center mb-4 cursor-pointer">
+                <input wire:model="direct" type="checkbox" value="" class="sr-only peer" {{$direct ? 'checked' : ''}}>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">عدم پخش IVR</span>
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
+            </div>
+            <div class=" w-3/4 flex item-center gap-4 align-middle items-center">
                 <p>
-                    در صورت عدم پاسخگویی منتقل شود به
+                    انتقال بلافاصله
+
+                    منتقل شود به
                 </p>
-                <x-select-operator :inputName='"0.backup"' :internals="$internals" :operators="$operators"/>
+                <x-select-operator :inputName='"0.main"' :internals="$internals" :operators="$operators"/>
 
             </div>
-
-
+        </div>
+        <div>
+            <p class="text-gray-500 ">
+                با روشن کردن این گزینه، تماس بدون پخش شدن منوی تعاملی به صورت خودکار به این شماره منتقل می‌گردد.
+            </p>
         </div>
     </div>
     <div class="flex justify-end pt-3">

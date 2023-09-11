@@ -43,5 +43,6 @@
                 });
             </script>
         </div>
+        @stack('scripts')
     </body>
 </html>

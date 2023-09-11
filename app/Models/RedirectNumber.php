@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RedirectNumber extends Model
@@ -18,4 +19,14 @@ class RedirectNumber extends Model
         'active',
         'title',
     ];
+
+    public function operator(): HasOne
+    {
+        return $this -> hasOne(Operator::class, 'id', 'redirect_phone_number');
+    }
+
+    public function backupOperator(): HasOne
+    {
+        return $this -> hasOne(Operator::class, 'id', 'backup_redirect_phone_number');
+    }
 }
