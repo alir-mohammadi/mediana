@@ -5,8 +5,11 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use KirschbaumDevelopment\NovaInlineRelationship;
 
 class Customer extends Resource
 {
@@ -44,8 +47,10 @@ class Customer extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Name','name')->sortable(),
-            HasMany::make('Phone Numbers', 'phoneNumbers', PhoneNumbers::class)
-
+            HasMany::make('Phone Numbers', 'phoneNumbers', PhoneNumbers::class),
+            Number::make('Phone Number','email')->sortable(),
+            Password::make('Password','password'),
+            NovaInlineRelationship\NovaInlineRelationship::make('phoneNumbers')->hideWhenUpdating()->hideFromDetail()->hideFromIndex(),
         ];
     }
 

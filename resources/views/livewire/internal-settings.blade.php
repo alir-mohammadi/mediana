@@ -204,7 +204,7 @@
 
                     منتقل شود به
                 </p>
-                <x-select-operator :inputName='"0.main"' :internals="$internals" :operators="$operators"/>
+                <x-select-operator :inputName='"10.main"' :internals="$internals" :operators="$operators"/>
 
             </div>
         </div>
