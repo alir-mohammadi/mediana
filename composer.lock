@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6bce563f4530b8ff0c6a29883f9d64c",
+    "content-hash": "a7d969cf2041fdc0236a74eb80d532df",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -973,6 +973,52 @@
             "time": "2022-02-20T15:07:15+00:00"
         },
         {
+            "name": "ganyicz/nova-callbacks",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ganyicz/nova-callbacks.git",
+                "reference": "63b4a216835afd60a52448a258b857d35371d755"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ganyicz/nova-callbacks/zipball/63b4a216835afd60a52448a258b857d35371d755",
+                "reference": "63b4a216835afd60a52448a258b857d35371d755",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^3.0|^4.0",
+                "php": "^7.2.5|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ganyicz\\NovaCallbacks\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Ganyicz",
+                    "email": "ganyicz.filip@gmail.com"
+                }
+            ],
+            "description": "Add after-save callbacks to your Laravel Nova resources.",
+            "keywords": [
+                "callbacks",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/ganyicz/nova-callbacks/issues",
+                "source": "https://github.com/ganyicz/nova-callbacks/tree/1.1.5"
+            },
+            "time": "2022-06-24T12:56:15+00:00"
+        },
+        {
             "name": "graham-campbell/result-type",
             "version": "v1.1.1",
             "source": {
@@ -1514,6 +1560,57 @@
                 }
             ],
             "time": "2023-01-17T01:02:51+00:00"
+        },
+        {
+            "name": "kirschbaum-development/nova-inline-relationship",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kirschbaum-development/nova-inline-relationship.git",
+                "reference": "94c92a47f075ec00192b2344124412d3018f9d61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kirschbaum-development/nova-inline-relationship/zipball/94c92a47f075ec00192b2344124412d3018f9d61",
+                "reference": "94c92a47f075ec00192b2344124412d3018f9d61",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "laravel/nova": "4.2",
+                "mockery/mockery": "^1.1",
+                "orchestra/testbench": "^7.4",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KirschbaumDevelopment\\NovaInlineRelationship\\NovaInlineRelationshipServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KirschbaumDevelopment\\NovaInlineRelationship\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field for displaying relationship properties inline.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/kirschbaum-development/nova-inline-relationship/issues",
+                "source": "https://github.com/kirschbaum-development/nova-inline-relationship/tree/2.0.0"
+            },
+            "time": "2023-02-15T18:02:23+00:00"
         },
         {
             "name": "laravel/framework",
