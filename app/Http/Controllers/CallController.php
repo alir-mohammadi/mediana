@@ -70,10 +70,10 @@ class CallController extends Controller
                 "ivr_timeout" => "4",
                 "ivr_timeout_method" => $phoneNumber->redirects()->where('number', '0')->exists() ? "forward" : "hangup",
                 "ivr_timeout_forward_number" => $phoneNumber -> redirects() -> where('number',
-                    '0') -> value('redirect_phone_number'),
+                    '0') -> first() ?->operator() ?->value('phone_number'),
                 "instant_forward" => $phoneNumber->direct ? 1 : 0,
                 "instant_forward_number" => $phoneNumber -> redirects() -> where('number',
-                    '0') -> value('redirect_phone_number'),
+                    '10') -> first() ?->operator() ?->value('phone_number'),
             ],
         ]);
 
