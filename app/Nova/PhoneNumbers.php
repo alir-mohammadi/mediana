@@ -50,6 +50,7 @@ class PhoneNumbers extends Resource
             Number::make('Phone Number'),
             Boolean::make('Direct' ,'direct'),
             HasMany::make('Voice Lines', 'voiceLines', VoiceLineResource::class),
+            HasMany::make('Operators', 'operators', OperatorResource::class),
         ];
     }
 
