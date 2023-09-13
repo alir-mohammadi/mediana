@@ -254,32 +254,8 @@ class CallController extends Controller
 
     public function outHangout(Request $request)
     {
-        $line = User::query()->where('email', '0'.$request->input('CallerIdNumber'))->whereHas('phoneNumbers',function ($q) use
-        (
-            $request
-        ) {
-            $q->where('phone_number','0'.$request->input('BlazarNumber'));
-        }
-        )->first()?->phoneNumbers()->first();
-        if (!isset($line))
-        {
-            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('BlazarNumber'))->whereHas('operators',function ($q) use
-            (
-                $request
-            ) {
-                $q->where('phone_number','0'.$request->input('CallerIdNumber'))->where('outgoing_access',true);
+        $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->first();
 
-            })->first();
-            if (!isset($line)) {
-                return response() -> json([
-                    'status'      => 0,
-                    'status_code' => 1,
-                    'message'     => 'line not found',
-                    'data'        => [
-                    ],
-                ], 404);
-            }
-        }
 
         $line->callLogs()->create(
             [
