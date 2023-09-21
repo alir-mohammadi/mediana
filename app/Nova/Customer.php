@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Enums\VoiceLine;
+use App\Nova\Actions\HijackCustomerAction;
 use Ganyicz\NovaCallbacks\HasCallbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -18,7 +19,7 @@ use Illuminate\Validation\Rules;
 
 class Customer extends Resource
 {
-     use HasCallbacks;
+
     /**
      * The model the resource corresponds to.
      *
@@ -54,9 +55,9 @@ class Customer extends Resource
             ID::make()->sortable(),
             Text::make('Name','name')->sortable(),
             HasMany::make('Phone Numbers', 'phoneNumbers', PhoneNumbers::class),
-            Number::make('Phone Number','email')->sortable(),
+            Text::make('Phone Number','email')->sortable(),
             Password::make('Password','password')->default(Str::password(8))->onlyOnForms(),
-            Number::make('directNumber','phoneNumber')->onlyOnForms() ->fillUsing(function () {
+            Text::make('directNumber','phoneNumber')->onlyOnForms() ->fillUsing(function () {
                 // Leaving this function empty will prevent Nova from setting this field
             }),
 
@@ -104,7 +105,9 @@ class Customer extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            new HijackCustomerAction,
+        ];
     }
 
 
@@ -114,43 +117,48 @@ class Customer extends Resource
      *
      * @return void
      */
-    public static function afterCreate(Request $request, $model)
+    public static function afterCreate(Request $request, $model): void
     {
-        $model->phoneNumbers()->create(['phone_number' => $request->input('phoneNumber')]);
+        if ($model->doesntHave('phoneNumbers'))
+        {
+            $model -> phoneNumbers() -> create(['phone_number' => $request -> input('phoneNumber')]);
 
-        $line = $model->phoneNumbers()->firstOrFail();
+            $line = $model -> phoneNumbers() -> firstOrFail();
 
-        $operator = $line->operators()->create([
-            'phone_number_id' => $model->email,
-            'outgoing_access' => true,
-            'active' => true,
-            'name' => $model->name,
-        ]);
+            $operator = $line -> operators() -> create([
+                'outgoing_access' => true,
+                'active'          => true,
+                'name'            => $model -> name,
+                'phone_number'    => $model -> email,
+            ]);
 
-        $redirects = [];
+            $redirects = [];
 
-        for ($i = 1; $i < 3; $i++) {
-            $redirects[] = [
-                'number' => $i,
-                'redirect_phone_number' => $operator->id,
-                'backup_redirect_phone_number' => null,
-                'active' => true,
-                'title' => null,
-            ];
+            for ($i = 1; $i < 3; $i++) {
+                $redirects[] = [
+                    'number'                       => $i,
+                    'redirect_phone_number'        => $operator -> id,
+                    'backup_redirect_phone_number' => null,
+                    'active'                       => true,
+                    'title'                        => null,
+                ];
+            }
+
+            $line -> redirects() -> createMany($redirects);
+
+            $line -> voiceLines() -> createMany([
+                [
+                    'type' => VoiceLine::income,
+                    'name' => config('voice.income.default')
+                ],
+                [
+                    'type' => VoiceLine::deactivate,
+                    'name' => config('voice.deactivate.default')
+                ],
+            ]);
         }
-
-        $line->redirects()->createMany($redirects);
-
-        $line->voiceLines()->createMany([
-            [
-                'type' => VoiceLine::income,
-                'name' => config('voice.income.default')
-            ],
-            [
-                'type' => VoiceLine::deactivate,
-                'name' => config('voice.deactivate.default')
-            ],
-        ]);
     }
+
+
 
 }

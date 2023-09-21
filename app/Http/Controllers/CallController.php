@@ -35,6 +35,8 @@ class CallController extends Controller
             ], 404);
         }
 
+        $phoneNumber = $phoneNumber->owner()->first()->phoneNumbers()->first();
+
         $activeTime = $phoneNumber -> activeTime() -> first();
         if (isset($activeTime)) {
             if ($activeTime -> from_day <= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek] && $activeTime -> to_day >= $this->week[now()->timezone('Asia/Tehran') -> dayOfWeek]) {
@@ -93,6 +95,9 @@ class CallController extends Controller
                 ],
             ], 404);
         }
+
+        $phoneNumber = $phoneNumber->owner()->first()->phoneNumbers()->first();
+
 
         $activeTime = $phoneNumber -> activeTime() -> first();
 
@@ -175,13 +180,27 @@ class CallController extends Controller
         )->first();
         if (!isset($user))
         {
-            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('CalledNumber'))->whereHas('operators',function ($q) use
+            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('CalledNumber'))->first();
+            if (!isset($line)) {
+                return response() -> json([
+                    'status'      => 0,
+                    'status_code' => 1,
+                    'message'     => 'line not found',
+                    'data'        => [
+                    ],
+                ], 404);
+            }
+
+            $line = $line->owner()->first()->phoneNumbers()->first();
+
+            $line = $line->whereHas('operators',function ($q) use
             (
                 $request
             ) {
                 $q->where('phone_number','0'.$request->input('CallerId'))->where('outgoing_access',true);
 
-            })->first();
+            });
+
             if (!isset($line)) {
                 return response() -> json([
                     'status'      => 0,
@@ -211,13 +230,28 @@ class CallController extends Controller
         )->first();
         if (!isset($user))
         {
-            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('CalledNumber'))->whereHas('operators',function ($q) use
+
+            $line = PhoneNumber::query()->where('phone_number','0'.$request->input('CalledNumber'))->first();
+            if (!isset($line)) {
+                return response() -> json([
+                    'status'      => 0,
+                    'status_code' => 1,
+                    'message'     => 'line not found',
+                    'data'        => [
+                    ],
+                ], 404);
+            }
+
+            $line = $line->owner()->first()->phoneNumbers()->first();
+
+            $line = $line->whereHas('operators',function ($q) use
             (
                 $request
             ) {
                 $q->where('phone_number','0'.$request->input('CallerId'))->where('outgoing_access',true);
 
-            })->first();
+            });
+
             if (!isset($line)) {
                 return response() -> json([
                     'status'      => 0,
@@ -233,7 +267,7 @@ class CallController extends Controller
             'status_code' => 0,
             'message'     => 'success',
             'data'        => [
-                'caller_id' => substr(($user?->phoneNumbers()->first()->phone_number ?? $line->phone_number),1)
+                'caller_id' => $request->input('CalledNumber')
             ],
         ]);
     }

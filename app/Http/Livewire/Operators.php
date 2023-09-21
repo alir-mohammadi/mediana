@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Operator;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -40,7 +41,7 @@ class Operators extends Component
 
     public function save()
     {
-        Operator::where('id', $this->selectedOperatorId)->update($this->input);
+        Operator::where('id', $this->selectedOperatorId)->update(Arr::except($this->input,['phone_number']));
         $this->emit('hideModal');
     }
 }

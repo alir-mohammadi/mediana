@@ -11,7 +11,7 @@ class LineStatus extends Component
 
     public function mount()
     {
-        $this->line = Auth::user()?->phoneNumbers()->first();
+        $this->lines = Auth::user()?->phoneNumbers()->get();
 
     }
     public function render()

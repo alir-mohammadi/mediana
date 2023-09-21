@@ -9,6 +9,7 @@
         "ganyicz/nova-callbacks": "^1.1",
         "guzzlehttp/guzzle": "^7.2",
         "kirschbaum-development/nova-inline-relationship": "^2.0",
+        "lab404/laravel-impersonate": "^1.7",
         "laravel/framework": "^10.10",
         "laravel/nova": "*",
         "laravel/sanctum": "^3.2",

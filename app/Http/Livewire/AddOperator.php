@@ -22,6 +22,11 @@ class AddOperator extends Component
     {
         $line = Auth::user()?->phoneNumbers()->first();
 
+        if ($line->operators()->where('phone_number', $this->input['phone_number'])->exists()) {
+            $this->emit('toastMessage', 'error', ["message" => 'اوپراتور با این شماره قبلا ثبت شده است.']);
+
+            return;
+        }
         $line->operators()->create($this->input);
 
         $this->input = [
