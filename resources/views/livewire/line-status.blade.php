@@ -11,9 +11,9 @@
             <th scope="col" class="px-6 py-3">
                 روز‌های باقیمانده
             </th>
-{{--            <th scope="col" class="px-6 py-3">--}}
-{{--                 دقایق باقیمانده ورودی--}}
-{{--            </th>--}}
+            <th scope="col" class="px-6 py-3">
+                 دقایق خروجی
+            </th>
             <th scope="col" class="px-6 py-3">
                 دقایق باقیمانده خروجی
             </th>
@@ -38,11 +38,11 @@
                     <td class="px-6 py-4">
                         {{$package?->pivot?->expire_at ?? "-"}}
                     </td>
-{{--                    <td class="px-6 py-4">--}}
-{{--                        {{$package?->pivot?->remaining_incoming_seconds ? : "-"}}--}}
-{{--                    </td>--}}
                     <td class="px-6 py-4">
-                        {{$package?->pivot?->remaining_outgoing_seconds ? :"-"}}
+                        {{$package?->outgoing_seconds ? gmdate('i',$package?->outgoing_seconds): "-"}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$package?->pivot?->remaining_outgoing_seconds ? gmdate('i',$package?->remaining_outgoing_seconds) :"-"}}
                     </td>
                     <td class="px-6 py-4">
                         {{$package->type ?? "-"}}
