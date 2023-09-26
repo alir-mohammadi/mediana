@@ -13,7 +13,7 @@ class PackageResource extends Resource
 
     public static $model = Package::class;
 
-    public static $title = 'id';
+    public static $title = 'type';
 
     public static $search = [
         'id', 'type', 'price',
@@ -30,10 +30,13 @@ class PackageResource extends Resource
             Text ::make('Price')
                 -> sortable(),
 
-            Number ::make('Duration')
+            Number ::make('Incoming Seconds')
                 -> sortable(),
 
-            Number ::make('Seconds')
+            Number ::make('Outgoing Seconds')
+                -> sortable(),
+
+            Number ::make('Duration' )
                 -> sortable(),
         ];
     }

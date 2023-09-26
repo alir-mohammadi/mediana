@@ -32,5 +32,12 @@
                 {{ __('ورود') }}
             </x-primary-button>
         </div>
+
+        <div class="flex items-center justify-center mt-4">
+
+            <a class="btn btn-link text-blue-400" href="{{ route('otp.login') }}">
+                 ورود با رمز یکبار مصرف
+            </a>
+        </div>
     </form>
 </x-guest-layout>

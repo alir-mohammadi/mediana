@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Enums\VoiceLine;
 use App\Models\PhoneNumber;
 use App\Models\User;
+use App\Packages\Mediana\Api\MessagesApi;
+use App\Packages\Mediana\Configuration;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Morilog\Jalali\CalendarUtils;
 
 class CallController extends Controller
@@ -158,6 +163,24 @@ class CallController extends Controller
             }
         }
 
+        $config = Configuration::getDefaultConfiguration()->setApiKey('Authorization', env('MEDIANA_API_KEY'))
+            ->setApiKeyPrefix('Authorization', 'AccessKey');
+        $apiInstance = new  MessagesApi(new Client(), $config);
+
+        $pattern = new \App\Packages\Mediana\Model\PatternToSend([
+            "pattern_code"=>"3y9t524v691y6ua",
+            "originator"=>env('MEDIANA_API_NUMBER'),
+            "recipient"=>Str::replaceFirst('0','+98',$number),
+            "values"=>
+                [
+                    "number"=>'+98'.$request->input('CallerIdNumber'),
+                    "digit" => $request->input('DigitsDialed'),
+                    "duration" => Carbon::now()
+                ]
+        ]);
+
+        $apiInstance->sendPattern($pattern);
+
         return response() -> json([
             'status'      => 1,
             'status_code' => 0,
@@ -274,7 +297,7 @@ class CallController extends Controller
 
     public function hangout(Request $request)
     {
-        $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->first();
+        $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->firstOrFail();
 
         $line->callLogs()->create(
             [
@@ -283,12 +306,14 @@ class CallController extends Controller
                 'duration' => 0
             ]);
 
+        $packageUser = $line->owner->packages()->where('active',true)->decrement('remaining_incoming_seconds',$request->input('Duration'));
+
         return $request->all();
     }
 
     public function outHangout(Request $request)
     {
-        $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->first();
+        $line = PhoneNumber::query()->where('phone_number', '0'.$request->input('BlazarNumber'))->firstOrFail();
 
 
         $line->callLogs()->create(
@@ -297,6 +322,8 @@ class CallController extends Controller
                 'from' => $request->input('UUID'),
                 'duration' => 1
             ]);
+
+        $packageUser = $line->owner->packages()->where('active',true)->decrement('remaining_outgoing_seconds',$request->input('Duration'));
 
         return $request->all();
     }

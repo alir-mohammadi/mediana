@@ -7,6 +7,7 @@ use App\Nova\Actions\HijackCustomerAction;
 use Ganyicz\NovaCallbacks\HasCallbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
@@ -57,9 +58,10 @@ class Customer extends Resource
             HasMany::make('Phone Numbers', 'phoneNumbers', PhoneNumbers::class),
             Text::make('Phone Number','email')->sortable(),
             Password::make('Password','password')->default(Str::password(8))->onlyOnForms(),
-            Text::make('directNumber','phoneNumber')->onlyOnForms() ->fillUsing(function () {
+            Text::make('Direct Number','phoneNumber')->onlyOnForms() ->fillUsing(function () {
                 // Leaving this function empty will prevent Nova from setting this field
             }),
+            BelongsToMany::make('Packages','packages',PackageResource::class)
 
         ];
     }

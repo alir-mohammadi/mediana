@@ -12,7 +12,10 @@
                 روز‌های باقیمانده
             </th>
             <th scope="col" class="px-6 py-3">
-                دقایق باقیمانده
+                 دقایق باقیمانده ورودی
+            </th>
+            <th scope="col" class="px-6 py-3">
+                دقایق باقیمانده خروجی
             </th>
             <th scope="col" class="px-6 py-3">
                 نوع بسته
@@ -27,18 +30,22 @@
         </thead>
         <tbody class="border-gray-300 border-t-0 rounded">
         @php
-            @endphp
+            $package = Auth::user()->packages()->first();
+        @endphp
         @if(!$lines->isEmpty())
             @foreach($lines as $line)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
                     <td class="px-6 py-4">
-                      -
+                        {{$package?->pivot?->expire_at ?? "-"}}
                     </td>
                     <td class="px-6 py-4">
-                       -
+                        {{$package?->pivot?->remaining_incoming_seconds ? : "-"}}
                     </td>
                     <td class="px-6 py-4">
-                       -
+                        {{$package?->pivot?->remaining_outgoing_seconds ? :"-"}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$package->type ?? "-"}}
                     </td>
                     <td class="px-6 py-4">
                         {{$line["phone_number"]}}

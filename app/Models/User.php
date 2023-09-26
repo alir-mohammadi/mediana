@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function calls(): HasManyThrough
     {
         return $this->hasManyThrough(CallLog::class, PhoneNumber::class, 'owner_id', 'phone_number', 'id', 'phone_number');
+    }
+
+    public function packages(): BelongsToMany
+    {
+        return $this -> belongsToMany(Package::class)->withPivot('started_at','expire_at','remaining_incoming_seconds','remaining_outgoing_seconds','active');
     }
 }
