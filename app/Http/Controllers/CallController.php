@@ -309,6 +309,7 @@ class CallController extends Controller
 
         $packageUser = $line->owner->packages()->where('active',true)->decrement('remaining_incoming_seconds',$request->input('Duration'));
 
+
         return $request->all();
     }
 

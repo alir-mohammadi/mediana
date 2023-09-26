@@ -47,7 +47,7 @@ class PhoneNumbers extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Customer','owner', Customer::class)->searchable()->sortable(),
-            Number::make('Phone Number'),
+            Number::make('Phone Number')->rules('unique'),
             Boolean::make('Direct' ,'direct'),
             HasMany::make('Voice Lines', 'voiceLines', VoiceLineResource::class),
             HasMany::make('Operators', 'operators', OperatorResource::class),
