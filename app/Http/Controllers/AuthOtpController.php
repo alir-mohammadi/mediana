@@ -40,7 +40,7 @@ class AuthOtpController extends Controller
             "originator"=>env('MEDIANA_API_NUMBER'),
             "recipient"=>Str::replaceFirst('0','+98',$request->input('email')),
             "values"=>
-                ["code"=>$verificationCode->otp]
+                ["code"=>(string)$verificationCode->otp]
         ]);
 
         $apiInstance->sendPattern($pattern);
