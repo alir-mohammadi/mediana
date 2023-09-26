@@ -39,10 +39,10 @@
                         {{$package?->pivot?->expire_at ?? "-"}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$package?->outgoing_seconds ? gmdate('i',$package?->outgoing_seconds): "-"}}
+                        {{$package?->outgoing_seconds ? (int)($package?->outgoing_seconds/60): "-"}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$package?->pivot?->remaining_outgoing_seconds ? gmdate('i',$package?->remaining_outgoing_seconds) :"-"}}
+                        {{$package?->pivot?->remaining_outgoing_seconds ? (int)($package?->pivot?->remaining_outgoing_seconds/60) :"-"}}
                     </td>
                     <td class="px-6 py-4">
                         {{$package->type ?? "-"}}
