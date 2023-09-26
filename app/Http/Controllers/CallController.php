@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Morilog\Jalali\CalendarUtils;
+use Morilog\Jalali\Jalalian;
 
 class CallController extends Controller
 {
@@ -175,7 +176,7 @@ class CallController extends Controller
                 [
                     "number"=>'+98'.$request->input('CallerId'),
                     "digit" => $request->input('DigitsDialed'),
-                    "duration" => Carbon::now()
+                    "duration" => Jalalian::now()->format('Y-m-d H:i:s')
                 ]
         ]);
 
