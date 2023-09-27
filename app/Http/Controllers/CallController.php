@@ -175,7 +175,7 @@ class CallController extends Controller
             "values"=>
                 [
                     "number"=>'+98'.$request->input('CallerId'),
-                    "digit" => $request->input('Input'),
+                    "digit" => (string) $request->input('Input'),
                     "duration" => Jalalian::now()->format('Y-m-d H:i:s')
                 ]
         ]);
