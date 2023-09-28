@@ -223,7 +223,7 @@ class CallController extends Controller
             ) {
                 $q->where('phone_number','0'.$request->input('CallerId'))->where('outgoing_access',true);
 
-            });
+            })->first();
 
             if (!isset($line)) {
                 return response() -> json([
@@ -274,7 +274,8 @@ class CallController extends Controller
             ) {
                 $q->where('phone_number','0'.$request->input('CallerId'))->where('outgoing_access',true);
 
-            });
+            })->first();
+
 
             if (!isset($line)) {
                 return response() -> json([
