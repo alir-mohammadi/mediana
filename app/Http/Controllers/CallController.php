@@ -215,9 +215,7 @@ class CallController extends Controller
                 ], 404);
             }
 
-            $line = $line->owner()->first()->phoneNumbers()->first();
-
-            $line = $line->whereHas('operators',function ($q) use
+            $line = $line->owner()->first()->phoneNumbers()->whereHas('operators',function ($q) use
             (
                 $request
             ) {
@@ -266,9 +264,7 @@ class CallController extends Controller
                 ], 404);
             }
 
-            $line = $line->owner()->first()->phoneNumbers()->first();
-
-            $line = $line->whereHas('operators',function ($q) use
+            $line = $line->owner()->first()->phoneNumbers()->whereHas('operators',function ($q) use
             (
                 $request
             ) {
