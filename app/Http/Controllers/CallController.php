@@ -163,24 +163,26 @@ class CallController extends Controller
                 ], 400);
             }
         }
+        if (!$phoneNumber->operators()->where('phone_number','0'.$request->input('CallerId'))->exists()) {
 
-        $config = Configuration::getDefaultConfiguration()->setApiKey('Authorization', env('MEDIANA_API_KEY'))
-            ->setApiKeyPrefix('Authorization', 'AccessKey');
-        $apiInstance = new  MessagesApi(new Client(), $config);
+            $config = Configuration ::getDefaultConfiguration() -> setApiKey('Authorization', env('MEDIANA_API_KEY'))
+                -> setApiKeyPrefix('Authorization', 'AccessKey');
+            $apiInstance = new  MessagesApi(new Client(), $config);
 
-        $pattern = new \App\Packages\Mediana\Model\PatternToSend([
-            "pattern_code"=>"3y9t524v691y6ua",
-            "originator"=>env('MEDIANA_API_NUMBER'),
-            "recipient"=>Str::replaceFirst('0','+98',$number),
-            "values"=>
-                [
-                    "number"=>'+98'.$request->input('CallerId'),
-                    "digit" => (string) $request->input('Input'),
-                    "duration" => Jalalian::now()->format('Y-m-d H:i:s')
-                ]
-        ]);
+            $pattern = new \App\Packages\Mediana\Model\PatternToSend([
+                "pattern_code" => "3y9t524v691y6ua",
+                "originator"   => env('MEDIANA_API_NUMBER'),
+                "recipient"    => Str ::replaceFirst('0', '+98', $number),
+                "values"       =>
+                    [
+                        "number"   => '+98'.$request -> input('CallerId'),
+                        "digit"    => (string) $request -> input('Input'),
+                        "duration" => Jalalian ::now() -> format('Y-m-d H:i:s')
+                    ]
+            ]);
 
-        $apiInstance->sendPattern($pattern);
+            $apiInstance -> sendPattern($pattern);
+        }
 
         return response() -> json([
             'status'      => 1,
@@ -300,7 +302,7 @@ class CallController extends Controller
         $line->callLogs()->create(
             [
                 "meta_data" => $request->all(),
-                'from' => $request->input('UUID'),
+                'from' => $request->input('OriginatorUUID') ?? $request->input('UUID'),
                 'duration' => 0
             ]);
 
@@ -318,7 +320,7 @@ class CallController extends Controller
         $line->callLogs()->create(
             [
                 "meta_data" => $request->all(),
-                'from' => $request->input('UUID'),
+                'from' => $request->input('OriginatorUUID') ?? $request->input('UUID'),
                 'duration' => 1
             ]);
 

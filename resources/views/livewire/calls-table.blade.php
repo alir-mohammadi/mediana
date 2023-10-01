@@ -67,6 +67,7 @@
                     </td>
                     <td class="px-6 py-4 text-right">
                         <a href="#" class="font-medium text-green-600 dark:text-green-500 hover:underline">پخش</a>
+                        <a href="#" wire:click="feedback('{{$call['from']}}')" class="font-medium text-green-600 dark:text-green-500 hover:underline">بازخورد</a>
                     </td>
                 </tr>
             @endforeach
@@ -90,5 +91,22 @@
     {{$calls->links()}}
     <div wire:poll.2000ms>
     </div>
-{{--    <livewire:feedback></livewire:feedback>--}}
+    <div id="feedback-modal" tabindex="-1" aria-hidden="true"
+         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <livewire:feedback></livewire:feedback>
+    </div>
+
+    @push('scripts')
+        <script>
+            window.livewire.on('showModal', () => {
+                modal = new window.Modal(document.getElementById('feedback-modal'));
+                modal.show();
+            });
+            window.livewire.on('hideModal', () => {
+                modal = new window.Modal(document.getElementById('feedback-modal'));
+                document.querySelector(".z-40").remove();
+                modal.hide();
+            });
+        </script>
+    @endpush
 </div>

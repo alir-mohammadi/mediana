@@ -33,6 +33,7 @@ class CallsTable extends Component
                                 'none')[ 'DigitsDialed' ] ?? null,
                         'created_at'        => $calls -> first()[ 'created_at' ],
                     ],
+                    'from' => $calls -> first()[ 'from' ],
                 ];
         });
 
@@ -50,5 +51,11 @@ class CallsTable extends Component
             $page,
             $options
         );
+    }
+
+    public function feedback($call_id)
+    {
+        $this->emit('feedback',encrypt($call_id));
+        $this->emit('showModal');
     }
 }

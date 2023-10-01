@@ -6,9 +6,12 @@ use App\Models\CallLog;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Morilog\Jalali\Jalalian;
 
 class Feedback extends Component
 {
+
+    public $listeners =['feedback' => 'callId'];
 
     public $input = [
         'name' => null,
@@ -20,23 +23,28 @@ class Feedback extends Component
     public $data = [
         'type' => null,
         'number' => null,
+        'time' => null,
     ];
 
     public $call_id;
 
     public function mount()
     {
+
         try {
 
-        $callLogs = CallLog::query()->where('from',decrypt($this->call_id))->get();
+            $callLogs = CallLog::query()->where('from',decrypt($this->call_id))->get();
         }
         catch (DecryptException $e)
         {
-           return redirect()->route('home');
+           return;
         }
         $this->data['type'] = $callLogs->last()->duration ? "خروجی" : "ورودی ";
+        $this->data['type'] .= "تماس با شماره" . ' 0' .$callLogs->last()->meta_data['BlazarNumber'];
+        $this->data['time'] = Jalalian::forge('now - '.$callLogs->last()->created_at->diffInMinutes(now()).' minutes')->ago();
         $this->data['number'] = $callLogs->last()->meta_data['CallerIdNumber'];
         $this->input = \App\Models\Feedback::query()->where('call_id',decrypt($this->call_id))->first()->meta ?? $this->input;
+
     }
     public function render()
     {
@@ -55,4 +63,10 @@ class Feedback extends Component
             'meta' => $this->input,
         ]);
     }
+    public function callId($call_id)
+    {
+        $this->call_id = $call_id;
+        $this->render();
+    }
+
 }
