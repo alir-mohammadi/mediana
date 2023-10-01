@@ -25,7 +25,7 @@ class CallsTable extends Component
                 [
                     "meta_data" => [
                         'Type'              => $calls -> first()[ 'duration' ],
-                        'HangupCause'       => $calls -> first()[ 'duration' ] ? $calls->whereNotNull('OriginatorUUID') -> where('HangupCause', 'NORMAL_CLEARING') -> count(): $calls -> where('HangupCause', 'NORMAL_CLEARING') -> count(),
+                        'HangupCause'       => $calls -> first()[ 'duration' ] ? $calls -> where([['OriginatorUUID','!=',null],['HangupCause', 'NORMAL_CLEARING']]) -> count(): $calls -> where('HangupCause', 'NORMAL_CLEARING') -> count(),
                         'Duration'          => $calls -> max('Duration'),
                         'CallerIdNumber'    => $calls -> first()[ 'CallerIdNumber' ],
                         'DestinationNumber' => $calls -> sortBy('StartTime')->last()[ 'DestinationNumber' ],
