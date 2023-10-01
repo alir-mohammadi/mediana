@@ -25,7 +25,7 @@ class CallsTable extends Component
                 [
                     "meta_data" => [
                         'Type'              => $calls -> first()[ 'duration' ],
-                        'HangupCause'       => $calls -> where('HangupCause', 'NORMAL_CLEARING') -> count(),
+                        'HangupCause'       => $calls -> first()[ 'duration' ] ? $calls->whereNotNull('OriginatorUUID') -> where('HangupCause', 'NORMAL_CLEARING') -> count(): $calls -> where('HangupCause', 'NORMAL_CLEARING') -> count(),
                         'Duration'          => $calls -> max('Duration'),
                         'CallerIdNumber'    => $calls -> first()[ 'CallerIdNumber' ],
                         'DestinationNumber' => $calls -> sortBy('StartTime')->last()[ 'DestinationNumber' ],
@@ -56,6 +56,6 @@ class CallsTable extends Component
     public function feedback($call_id)
     {
         $this->emit('feedback',encrypt($call_id));
-        $this->emit('showModal');
+
     }
 }

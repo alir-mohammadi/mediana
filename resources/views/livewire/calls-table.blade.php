@@ -66,7 +66,7 @@
                         {{\Morilog\Jalali\Jalalian::forge(Carbon\Carbon::parse($meta['created_at'])->setTimezone('Asia/Tehran')->format('Y/m/d H:i:s'))->format("Y/m/d H:i:s")}}
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-green-600 dark:text-green-500 hover:underline">پخش</a>
+{{--                        <a href="#" class="font-medium text-green-600 dark:text-green-500 hover:underline">پخش</a>--}}
                         <a href="#" wire:click="feedback('{{$call['from']}}')" class="font-medium text-green-600 dark:text-green-500 hover:underline">بازخورد</a>
                     </td>
                 </tr>
