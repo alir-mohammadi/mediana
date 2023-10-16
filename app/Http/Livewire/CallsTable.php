@@ -55,7 +55,7 @@ class CallsTable extends Component
 
     public function feedback($call_id)
     {
-        $this->emit('feedback',encrypt($call_id));
+        $this->emit('feedback',($call_id));
 
     }
 }

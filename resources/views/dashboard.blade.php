@@ -11,4 +11,23 @@
                <livewire:calls-table></livewire:calls-table>
         </div>
     </div>
+
+        <livewire:feedback></livewire:feedback>
+
+
+    @push('scripts')
+        <script>
+            window.livewire.on('showModal-feedback', () => {
+                modalFeedback = new window.Modal(document.getElementById('feedback-modal'));
+                console.log(modalFeedback);
+                modalFeedback.show();
+                console.log(modalFeedback);
+            });
+            window.livewire.on('hideModal-feedback', () => {
+                modal = new window.Modal(document.getElementById('feedback-modal'));
+                document.querySelector(".z-40").remove();
+                modal.hide();
+            });
+        </script>
+    @endpush
 </x-app-layout>

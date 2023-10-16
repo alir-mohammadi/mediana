@@ -27,23 +27,15 @@ class Feedback extends Component
     ];
 
     public $call_id;
+    /**
+     * @var true
+     */
+    private bool $showModal = false;
 
     public function mount()
     {
 
-        try {
-
-            $callLogs = CallLog::query()->where('from',decrypt($this->call_id))->get();
-        }
-        catch (DecryptException $e)
-        {
-           return;
-        }
-        $this->data['type'] = $callLogs->last()->duration ? "خروجی" : "ورودی ";
-        $this->data['type'] .= "تماس با شماره" . ' 0' .$callLogs->last()->meta_data['BlazarNumber'];
-        $this->data['time'] = Jalalian::forge('now - '.$callLogs->last()->created_at->diffInMinutes(now()).' minutes')->ago();
-        $this->data['number'] = $callLogs->last()->meta_data['CallerIdNumber'];
-        $this->input = \App\Models\Feedback::query()->where('call_id',decrypt($this->call_id))->first()->meta ?? $this->input;
+        $this -> fetchData();
 
     }
     public function render()
@@ -55,18 +47,45 @@ class Feedback extends Component
     {
         \App\Models\Feedback::updateOrCreate(
             [
-                'call_id' => decrypt($this->call_id),
+                'call_id' => ($this->call_id),
         ]
             ,[
-            'call_id' => decrypt($this->call_id),
+            'call_id' => ($this->call_id),
             'creator' => auth()?->id() ?? "Anonymous",
             'meta' => $this->input,
         ]);
+        $this->emit('hideModal-feedback');
+
     }
     public function callId($call_id)
     {
         $this->call_id = $call_id;
-        $this->render();
+        $this->fetchData();
+//        $this->showModal = true;
+        $this->emit('showModal-feedback');
+    }
+
+    /**
+     * @return void
+     */
+    public function fetchData(): void
+    {
+        try {
+
+            $callLogs = CallLog ::query() -> where('from', ($this -> call_id)) -> get();
+        } catch (DecryptException $e) {
+            return;
+        }
+       if ($callLogs -> isEmpty()) {
+            return;
+        }
+
+        $this -> data[ 'type' ] = $callLogs -> last() -> duration ? "خروجی" : "ورودی ";
+        $this -> data[ 'type' ] .= "تماس با شماره".' 0'.$callLogs -> last() -> meta_data[ 'BlazarNumber' ];
+        $this -> data[ 'time' ] = Jalalian ::forge('now - '.$callLogs -> last() -> created_at -> diffInMinutes(now()).' minutes') -> ago();
+        $this -> data[ 'number' ] = $callLogs -> last() -> meta_data[ 'CallerIdNumber' ];
+        $this -> input = \App\Models\Feedback ::query() -> where('call_id',
+            ($this -> call_id)) -> first() -> meta ?? $this -> input;
     }
 
 }

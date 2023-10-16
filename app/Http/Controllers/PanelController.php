@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class PanelController extends Controller
 {
 
@@ -33,6 +35,11 @@ class PanelController extends Controller
     public function operators()
     {
         return view('operators');
+    }
+
+    public function feedback(Request $request)
+    {
+        return view('feedback',['callId' => $request->input('callId')]);
     }
 
 

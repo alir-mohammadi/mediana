@@ -67,7 +67,12 @@
                     </td>
                     <td class="px-6 py-4 text-right">
 {{--                        <a href="#" class="font-medium text-green-600 dark:text-green-500 hover:underline">پخش</a>--}}
-                        <a href="#" wire:click="feedback('{{$call['from']}}')" class="font-medium text-green-600 dark:text-green-500 hover:underline">بازخورد</a>
+{{--                        <a href="#" wire:click="feedback('{{$call['from']}}')" class="font-medium text-green-600 dark:text-green-500 hover:underline">بازخورد</a>--}}
+                        <button wire:click="feedback('{{$call['from']}}')"
+                        type="button"
+                        class="p-2 focus:outline-none text-green-400 bg-none border-2 border-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">
+                            بازخورد
+                        </button>
                     </td>
                 </tr>
             @endforeach
@@ -89,24 +94,8 @@
     </table>
 
     {{$calls->links()}}
-    <div wire:poll.2000ms>
-    </div>
-    <div id="feedback-modal" tabindex="-1" aria-hidden="true"
-         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <livewire:feedback></livewire:feedback>
-    </div>
+{{--    <div wire:poll.2000ms>--}}
 
-    @push('scripts')
-        <script>
-            window.livewire.on('showModal', () => {
-                modal = new window.Modal(document.getElementById('feedback-modal'));
-                modal.show();
-            });
-            window.livewire.on('hideModal', () => {
-                modal = new window.Modal(document.getElementById('feedback-modal'));
-                document.querySelector(".z-40").remove();
-                modal.hide();
-            });
-        </script>
-    @endpush
+
+
 </div>

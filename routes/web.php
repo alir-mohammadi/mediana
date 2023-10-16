@@ -29,6 +29,7 @@ Route::get('/internal-settings',[\App\Http\Controllers\PanelController::class,'i
 Route::get('/timesheet-settings',[\App\Http\Controllers\PanelController::class,'timesheetSettings'])->middleware(['auth', 'verified'])->name('timesheet-settings');
 Route::get('/contacts',[\App\Http\Controllers\PanelController::class,'contacts'])->middleware(['auth', 'verified'])->name('contacts');
 Route::get('/operators',[\App\Http\Controllers\PanelController::class,'operators'])->middleware(['auth', 'verified'])->name('operators');
+Route::get('/feedback',[\App\Http\Controllers\PanelController::class,'feedback'])->name('feedback');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -164,7 +164,6 @@ class CallController extends Controller
             }
         }
         if (!$phoneNumber->operators()->where('phone_number','0'.$request->input('CallerId'))->exists()) {
-
             $config = Configuration ::getDefaultConfiguration() -> setApiKey('Authorization', env('MEDIANA_API_KEY'))
                 -> setApiKeyPrefix('Authorization', 'AccessKey');
             $apiInstance = new  MessagesApi(new Client(), $config);
